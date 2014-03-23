@@ -5,7 +5,7 @@
  }
  </style>
  <body>
-  <canvas id="boat-canvas" width="500" height="300"></canvas>
+  <canvas id="boat-canvas" width="300" height="300"></canvas>
   <script>
 window.requestAnimFrame = (function(callback) {
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
@@ -14,23 +14,48 @@ window.requestAnimFrame = (function(callback) {
     };
 })();
 
-function draw_boat(x, y) {
+var boat_length = 30;
+var boat_width = 10;
+
+function draw_boat(x, y, direction) {
+   context.beginPath();
    context.fillStyle = "rgb(200, 40, 150)";
-   context.fillRect(x, y, 40, 15);
+   context.lineWidth = boat_width;
+   context.moveTo(x, y);
+   context.lineTo(x + Math.cos(direction) * boat_length,
+                  y + Math.sin(direction) * boat_length);
+   context.stroke();
+   context.closePath();
 }
 
-var x_pos = 10, y_pos = 10, speed = 1;
+var x_pos = 150, y_pos = 150;
+var speed = 1
+var direction = Math.PI / 4;
 
 function simulate_boat_motion(canvas, context) {
-    if (x_pos >= canvas.width - 40 || x_pos <= 0) {
-        speed = speed * -1;
-    }
-    var newX = x_pos + speed;
+    // x, y is in the top left so the direction needs to be translated to
+    // point north, south as seen by the user
+    var d = (2 * Math.PI) - direction;
+
+    var newX = x_pos + (speed * Math.cos(d));
+    var newY = y_pos + (speed * Math.sin(d));
+
+    console.log("New position: " + newX + "," + newY);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
-    draw_boat(newX, y_pos);
+    draw_boat(newX, newY, d);
+
+    var x_end = newX + Math.cos(d) * boat_length;
+    var y_end = newY + Math.sin(d) * boat_length;
+
+    if (x_end >= canvas.width || x_pos <= 0 ||
+        y_end >= canvas.height || y_pos <= 0) {
+        console.log("Stop");
+        return;
+    }
 
     x_pos = newX;
+    y_pos = newY;
 
     requestAnimationFrame(function() {
         simulate_boat_motion(canvas, context)
