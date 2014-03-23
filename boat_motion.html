@@ -4,8 +4,8 @@
    border: 1px dotted;
  }
  </style>
- <body onload="loaded()">
-  <canvas id="boat_canvas" width="500" height="300"></canvas>
+ <body>
+  <canvas id="boat-canvas" width="500" height="300"></canvas>
   <script>
 window.requestAnimFrame = (function(callback) {
     return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
@@ -14,31 +14,34 @@ window.requestAnimFrame = (function(callback) {
     };
 })();
 
-var canvas;
-var context;
-
-function loaded() {
-   canvas = document.getElementById("boat_canvas");
-   context = canvas.getContext("2d");
-   simulate_boat_motion();
-}
-
-var x_pos = 10, y_pos = 10, speed = 1;
-function simulate_boat_motion() {
-    if (x_pos >= canvas.width - 40 || x_pos <= 0) {
-        speed = speed * -1;
-    }
-    var newX = x_pos + speed;
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    draw_boat(newX, y_pos);
-    x_pos = newX;
-    requestAnimationFrame(simulate_boat_motion);
-}
-
 function draw_boat(x, y) {
    context.fillStyle = "rgb(200, 40, 150)";
    context.fillRect(x, y, 40, 15);
 }
+
+var x_pos = 10, y_pos = 10, speed = 1;
+
+function simulate_boat_motion(canvas, context) {
+    if (x_pos >= canvas.width - 40 || x_pos <= 0) {
+        speed = speed * -1;
+    }
+    var newX = x_pos + speed;
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    draw_boat(newX, y_pos);
+
+    x_pos = newX;
+
+    requestAnimationFrame(function() {
+        simulate_boat_motion(canvas, context)
+    });
+}
+
+var canvas = document.getElementById("boat-canvas");
+var context = canvas.getContext("2d");
+
+simulate_boat_motion(canvas, context);
+
   </script>
  </body>
 </html>
