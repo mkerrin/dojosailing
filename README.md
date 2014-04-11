@@ -1,4 +1,18 @@
 
+* Getting Started
+
+Run the following:
+
+$ git clone https://github.com/mkerrin/dojosailing.git
+$ svn checkout http://blockly.googlecode.com/svn/trunk/ blockly-read-only
+
+Open dojosailing/boat_motion.html in a browser to see what will be motion of
+a boat relative to wind coming from the north.
+
+Open dojosailing/customblockly/index.html to see what we learned about
+blockly and creating blocks.
+
+
 * Sailing project
 
 ** Goals of this project:
