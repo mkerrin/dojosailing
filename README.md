@@ -1,7 +1,6 @@
 
 * Getting Started
 
-Run the following:
 
 $ git clone https://github.com/mkerrin/dojosailing.git
 $ svn checkout http://blockly.googlecode.com/svn/trunk/ blockly-read-only
