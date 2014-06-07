@@ -1,5 +1,5 @@
 
-* Getting Started
+Getting Started
 
 Run the following:
 
@@ -13,16 +13,16 @@ Open dojosailing/customblockly/index.html to see what we learned about
 blockly and creating blocks.
 
 
-* Sailing project
+Sailing project
 
-** Goals of this project:
+Goals of this project:
 
  - sailing simulation project
  - control of boat using blockly
  - export blockly code onto a real boat
 
 
-** Struture
+Struture
 
  - boat_motion.html
 
@@ -33,7 +33,7 @@ blockly and creating blocks.
    Basic example of creating a blockly blocks.
 
 
-* Item todo
+Item todo
 
 1. Generate JavaScript from blockly program.
 
