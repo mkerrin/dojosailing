@@ -1,0 +1,18 @@
+.blockContainer {
+    	background-color: blue;
+		float:left;
+		width:50%;
+		height:100%;
+
+}
+.SimContainer {
+    	background-color: green;
+		float:left;
+		width:50%;
+		height:100%;
+}
+
+.blocklySvg {
+overflow: auto !important;
+border: none !important;
+}
